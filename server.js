@@ -8,6 +8,7 @@ const mongodb = require('./database/connect');
 const app = express();
 
 const cors = require('cors');
+const { mongo } = require('mongoose');
 
 const port = 3000;
 
@@ -89,12 +90,16 @@ process.on('uncaughtException', (err, origin) => {
   );
 });
 
-mongodb.initDb((err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    app.listen(process.env.PORT || port, () => {
-      console.log(`Running and db on port  ` + (process.env.PORT || 3000));
-    });
-  }
-});
+if (process.env.NODE_ENV !== 'test') {
+  mongodb.initDb((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      app.listen(process.env.PORT || port, () => {
+        console.log(`Running and db on port  ` + (process.env.PORT || 3000));
+      });
+    }
+  });
+}
+
+module.exports = app;
