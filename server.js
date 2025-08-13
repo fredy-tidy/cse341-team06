@@ -52,8 +52,11 @@ passport.use(
       callbackURL: process.env.GITHUB_CALLBACK_URL
     },
     (accessToken, refreshToken, profile, done) => {
-      // Here you can save the user information to your database
-      return done(null, profile);
+      const userData = {
+        profile,
+        accessToken
+      };
+      return done(null, userData);
     }
   )
 );
