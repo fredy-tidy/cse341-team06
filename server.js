@@ -2,6 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const GitHubStrategy = require('passport-github2').Strategy;
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 
 const mongodb = require('./database/connect');
 const app = express();
@@ -14,6 +15,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URL
+    }),
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true
