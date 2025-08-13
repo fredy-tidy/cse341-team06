@@ -12,11 +12,7 @@ router.post(
   ordersControllers.createOrders
 );
 router.delete('/:orderId', isAuthenticate, ordersControllers.deleteOrder);
-router.get(
-  '/customer/:customerId',
-  isAuthenticate,
-  ordersControllers.getOrdersByCustomer
-);
+router.get('/customer/:customerId', ordersControllers.getOrdersByCustomer);
 router.put(
   '/:orderId',
   isAuthenticate,

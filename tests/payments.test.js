@@ -1,5 +1,15 @@
 const request = require('supertest');
 const app = require('../server');
+const mongodb = require('../database/connect');
+
+beforeAll((done) => {
+  mongodb.initDb((err) => {
+    if (err) {
+      console.log(err);
+    }
+    done();
+  });
+});
 
 describe('GET /payments', () => {
   it('should respond with status 200', async () => {

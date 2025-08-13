@@ -90,16 +90,14 @@ process.on('uncaughtException', (err, origin) => {
   );
 });
 
-if (process.env.NODE_ENV !== 'test') {
-  mongodb.initDb((err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      app.listen(process.env.PORT || port, () => {
-        console.log(`Running and db on port  ` + (process.env.PORT || 3000));
-      });
-    }
-  });
-}
+mongodb.initDb((err) => {
+  if (err) {
+    console.log(err);
+  } else if (process.env.NODE_ENV !== 'test') {
+    app.listen(process.env.PORT || port, () => {
+      console.log(`Running and db on port  ` + (process.env.PORT || 3000));
+    });
+  }
+});
 
 module.exports = app;

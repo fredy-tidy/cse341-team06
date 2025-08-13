@@ -69,7 +69,7 @@ DELETE http://localhost:3000/electronic/688d48866a4c870350f3f82a
 GET https://cse341-team06.onrender.com/
 
 ### test getAllDevices endpoint
-GET https://cse341-team06.onrender.com/electronic
+GET https://cse341-team06-cniz.onrender.com/electronic
 
 ### test getDeviceById endpoint
 GET https://cse341-team06.onrender.com/electronic/688bc60dae19851a422039ba
