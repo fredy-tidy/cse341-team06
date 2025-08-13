@@ -13,4 +13,18 @@ router.get('/', (req, res) => {
   res.send('Hellow World at week 05');
 });
 
+router.get(
+  '/auth/github',
+  passport.authenticate('github', { scope: ['user:email'] })
+);
+
+router.get(
+  '/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/' }),
+  (req, res) => {
+    req.session.user = req.user;
+    res.redirect('/api-docs');
+  }
+);
+
 module.exports = router;
