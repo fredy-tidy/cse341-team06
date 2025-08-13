@@ -44,27 +44,3 @@ mongodb.initDb((err) => {
     });
   }
 });
-
-
-// ✅ Benjamin Offor code snippet
-const express = require('express');
-const mongoose = require('mongoose');
-const storeRoutes = require('./routes/storeRoutes');
-
-const app = express();
-app.use(express.json());
-
-// ✅ Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => {
-    console.log('✅ Connected to MongoDB');
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT}`);
-    });
-  })
-
-// Routes
-app.use('/api', storeRoutes);
-
-// Server
-app.listen(3000, () => console.log('Server running on port 3000'));
