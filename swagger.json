@@ -344,6 +344,7 @@
     "/customers/": {
       "get": {
         "tags": ["customers"],
+        "summary": "Get all customers",
         "description": "Get Customers from DB",
         "responses": {
           "200": {
@@ -356,6 +357,7 @@
       },
       "post": {
         "tags": ["customers"],
+        "summary": "Create a new customer",
         "description": "Create a new customer",
         "parameters": [
           {
@@ -385,6 +387,7 @@
     "/customers/{id}": {
       "get": {
         "tags": ["customers"],
+        "summary": "Get a customer by ID",
         "description": "Get a customer by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "type": "string" }
@@ -398,6 +401,7 @@
       },
       "put": {
         "tags": ["customers"],
+        "summary": "Update a customer by ID",
         "description": "Update a customer by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "type": "string" },
@@ -426,6 +430,7 @@
       },
       "delete": {
         "tags": ["customers"],
+        "summary": "Delete a customer by ID",
         "description": "Delete a customer by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "type": "string" }
@@ -440,6 +445,7 @@
     "/customers/{username}": {
       "get": {
         "tags": ["customers"],
+        "summary": "Get a customer by username",
         "description": "Get a customer by username",
         "parameters": [
           {
@@ -459,6 +465,7 @@
     "/orders/": {
       "post": {
         "tags": ["orders"],
+        "summary": "Create a new order",
         "description": "Get orders form DB",
         "parameters": [
           {
@@ -484,7 +491,8 @@
     "/orders/{orderId}": {
       "delete": {
         "tags": ["orders"],
-        "description": "Delete an order by ID",
+        "summary": "Delete an order by ID",
+        "description": "Delete an order by its unique identifier",
         "parameters": [
           {
             "name": "orderId",
@@ -498,51 +506,53 @@
           "404": { "description": "Not Found" },
           "500": { "description": "Internal Server Error" }
         }
-      },
-      "put": {
-        "tags": ["orders"],
-        "description": "Update order by ID",
-        "parameters": [
-          {
-            "name": "orderId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "productIds": { "type": "array", "items": { "type": "string" } }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": { "description": "OK" },
-          "400": { "description": "Bad Request" },
-          "500": { "description": "Internal Server Error" }
-        }
       }
     },
-    "/orders/customer/{customerId}": {
-      "get": {
-        "tags": ["orders"],
-        "description": "Get all orders for a specific customer",
-        "parameters": [
-          {
-            "name": "customerId",
-            "in": "path",
-            "required": true,
-            "type": "string"
+    "put": {
+      "tags": ["orders"],
+      "summary": "Update an order by ID",
+      "description": "Update order by ID",
+      "parameters": [
+        {
+          "name": "orderId",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "body",
+          "in": "body",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "productIds": { "type": "array", "items": { "type": "string" } }
+            }
           }
-        ],
-        "responses": {
-          "200": { "description": "OK" },
-          "500": { "description": "Internal Server Error" }
         }
+      ],
+      "responses": {
+        "200": { "description": "OK" },
+        "400": { "description": "Bad Request" },
+        "500": { "description": "Internal Server Error" }
+      }
+    }
+  },
+  "/orders/customer/{customerId}": {
+    "get": {
+      "tags": ["orders"],
+      "summary": "Get all orders for a specific customer",
+      "description": "Get all orders for a specific customer",
+      "parameters": [
+        {
+          "name": "customerId",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": { "description": "OK" },
+        "500": { "description": "Internal Server Error" }
       }
     }
   }
