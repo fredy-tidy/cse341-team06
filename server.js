@@ -31,8 +31,6 @@ app.use(cors({ origin: '*' }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', require('./routes'));
-
 passport.use(
   new GitHubStrategy(
     {
@@ -46,6 +44,31 @@ passport.use(
     }
   )
 );
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+passport.deserializeUser((obj, done) => {
+  done(null, obj);
+});
+
+app.use('/', require('./routes'));
+
+app.get('/login', (req, res) => {
+  const user = req.session.user;
+  const name = user?.profile?.displayName || user?.profile?.username || 'Guest';
+  res.send(`Logged in as ${name}`);
+});
+
+app.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).send('Error');
+    }
+    res.clearCookie('connect.sid');
+    res.redirect('/');
+  });
+});
 
 process.on('uncaughtException', (err, origin) => {
   console.log(
