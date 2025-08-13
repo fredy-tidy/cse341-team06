@@ -1,4 +1,6 @@
 const express = require('express');
+const passport = require('passport');
+const GitHubStrategy = require('passport-github2').Strategy;
 
 const mongodb = require('./database/connect');
 const app = express();
@@ -26,7 +28,24 @@ app.use((req, res, next) => {
 app.use(cors({ methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] }));
 app.use(cors({ origin: '*' }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use('/', require('./routes'));
+
+passport.use(
+  new GitHubStrategy(
+    {
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: process.env.GITHUB_CALLBACK_URL
+    },
+    (accessToken, refreshToken, profile, done) => {
+      // Here you can save the user information to your database
+      return done(null, profile);
+    }
+  )
+);
 
 process.on('uncaughtException', (err, origin) => {
   console.log(

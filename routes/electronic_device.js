@@ -1,20 +1,24 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
 const deviceController = require('../controller/device');
 const validation = require('../middleware/validate');
+const { isAuthenticate } = require('../middleware/auth');
 
 router.get('/', deviceController.getAllDevices);
 router.get('/:id', deviceController.getSingleDevice);
-router.post('/',validation.saveDevice, deviceController.createDevice);
-router.put('/:id',validation.saveDevice,deviceController.updateDevice);
-router.delete('/:id', deviceController.deleteDevice);
-
-/*
-router.get('/', (req,res) => {
-    // swagger.tags=['Hello World']
-   res.send('Hellow World at week 05 teams 06');
-});
-*/
+router.post(
+  '/',
+  isAuthenticate,
+  validation.saveDevice,
+  deviceController.createDevice
+);
+router.put(
+  '/:id',
+  isAuthenticate,
+  validation.saveDevice,
+  deviceController.updateDevice
+);
+router.delete('/:id', isAuthenticate, deviceController.deleteDevice);
 
 module.exports = router;
