@@ -344,7 +344,7 @@
     "/customers/": {
       "get": {
         "tags": ["customers"],
-        "description": "",
+        "description": "Get Customers from DB",
         "responses": {
           "200": {
             "description": "OK"
@@ -356,7 +356,7 @@
       },
       "post": {
         "tags": ["customers"],
-        "description": "",
+        "description": "Create a new customer",
         "parameters": [
           {
             "name": "body",
@@ -385,7 +385,7 @@
     "/customers/{id}": {
       "get": {
         "tags": ["customers"],
-        "description": "",
+        "description": "Get a customer by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "type": "string" }
         ],
@@ -398,7 +398,7 @@
       },
       "put": {
         "tags": ["customers"],
-        "description": "",
+        "description": "Update a customer by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "type": "string" },
           {
@@ -426,7 +426,7 @@
       },
       "delete": {
         "tags": ["customers"],
-        "description": "",
+        "description": "Delete a customer by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "type": "string" }
         ],
@@ -440,7 +440,7 @@
     "/customers/{username}": {
       "get": {
         "tags": ["customers"],
-        "description": "",
+        "description": "Get a customer by username",
         "parameters": [
           {
             "name": "username",
@@ -459,7 +459,7 @@
     "/orders/": {
       "post": {
         "tags": ["orders"],
-        "description": "",
+        "description": "Get orders form DB",
         "parameters": [
           {
             "name": "body",
@@ -484,7 +484,7 @@
     "/orders/{orderId}": {
       "delete": {
         "tags": ["orders"],
-        "description": "",
+        "description": "Delete an order by ID",
         "parameters": [
           {
             "name": "orderId",
@@ -501,7 +501,7 @@
       },
       "put": {
         "tags": ["orders"],
-        "description": "",
+        "description": "Update order by ID",
         "parameters": [
           {
             "name": "orderId",
@@ -530,7 +530,7 @@
     "/orders/customer/{customerId}": {
       "get": {
         "tags": ["orders"],
-        "description": "",
+        "description": "Get all orders for a specific customer",
         "parameters": [
           {
             "name": "customerId",
