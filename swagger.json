@@ -506,53 +506,53 @@
           "404": { "description": "Not Found" },
           "500": { "description": "Internal Server Error" }
         }
-      }
-    },
-    "put": {
-      "tags": ["orders"],
-      "summary": "Update an order by ID",
-      "description": "Update order by ID",
-      "parameters": [
-        {
-          "name": "orderId",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "body",
-          "in": "body",
-          "schema": {
-            "type": "object",
-            "properties": {
-              "productIds": { "type": "array", "items": { "type": "string" } }
+      },
+      "put": {
+        "tags": ["orders"],
+        "summary": "Update an order by ID",
+        "description": "Update order by ID",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "productIds": { "type": "array", "items": { "type": "string" } }
+              }
             }
           }
+        ],
+        "responses": {
+          "200": { "description": "OK" },
+          "400": { "description": "Bad Request" },
+          "500": { "description": "Internal Server Error" }
         }
-      ],
-      "responses": {
-        "200": { "description": "OK" },
-        "400": { "description": "Bad Request" },
-        "500": { "description": "Internal Server Error" }
       }
-    }
-  },
-  "/orders/customer/{customerId}": {
-    "get": {
-      "tags": ["orders"],
-      "summary": "Get all orders for a specific customer",
-      "description": "Get all orders for a specific customer",
-      "parameters": [
-        {
-          "name": "customerId",
-          "in": "path",
-          "required": true,
-          "type": "string"
+    },
+    "/orders/customer/{customerId}": {
+      "get": {
+        "tags": ["orders"],
+        "summary": "Get all orders for a specific customer",
+        "description": "Get all orders for a specific customer",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK" },
+          "500": { "description": "Internal Server Error" }
         }
-      ],
-      "responses": {
-        "200": { "description": "OK" },
-        "500": { "description": "Internal Server Error" }
       }
     }
   }
